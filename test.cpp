@@ -3,6 +3,7 @@
 #include <fstream>
 #include "main.cpp"
 
+#if 0
 TEST(TestCase1, Solution)
 {
     auto Solve = [](std::istream &is) -> std::string {
@@ -110,6 +111,8 @@ Yes
     }
 }
 
+#endif
+
 TEST(TestCase2, Solution)
 {
     auto Solve = [](std::istream &is) -> std::string {
@@ -175,7 +178,6 @@ Yes
                 Solve(fake_cin));
     }
 }
-
 
 #if 0
 TEST(TestCase5, Solution)
