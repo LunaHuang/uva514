@@ -3,7 +3,6 @@
 #include <fstream>
 #include "main.cpp"
 
-#if 0
 TEST(TestCase1, Solution)
 {
     auto Solve = [](std::istream &is) -> std::string {
@@ -62,8 +61,8 @@ TEST(TestCase1, Solution)
 0
 )";
 
-        EXPECT_EQ(
-                R"(
+EXPECT_EQ(
+R"(
 Yes
 No
 Yes
@@ -106,12 +105,9 @@ Yes
 Yes
 Yes
 
-)",
-                Solve(fake_cin));
+)",Solve(fake_cin));
     }
 }
-
-#endif
 
 TEST(TestCase2, Solution)
 {
@@ -135,7 +131,7 @@ TEST(TestCase2, Solution)
 )";
 
         EXPECT_EQ(
-                R"(
+R"(
 Yes
 No
 Yes
@@ -143,8 +139,7 @@ Yes
 
 Yes
 
-)",
-                Solve(fake_cin));
+)", Solve(fake_cin));
     }
 }
 
@@ -179,7 +174,7 @@ Yes
     }
 }
 
-#if 0
+#if 1
 TEST(TestCase5, Solution)
 {
     auto Solve = []() -> std::string {
@@ -491,8 +486,7 @@ No
 Yes
 Yes
 
-)",
-                Solve());
+)",Solve());
     }
 }
 #endif

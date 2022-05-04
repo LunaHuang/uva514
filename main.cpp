@@ -17,27 +17,79 @@ class Train
 
 public:
     std::deque< int > const &get_on_rail() const { return on_rail_; }
+    std::deque< int > const &get_on_station() const { return on_station_; }
 
     void show(void)
     {
-        //        for (auto &it : occurrences_) {
-        //            std::cout << it.first << ":" << it.second << std::endl;
-        //        }
+        for (auto &it : on_rail_) {
+			std::cout << it << " ";
+        }
+		std::cout << std::endl;
     }
 
-    Train &operator<<(const std::string &line)
+    void show_start(void)
     {
-        return *this;
+        for (auto &it : on_start_) {
+			std::cout << it << " ";
+        }
+		std::cout << std::endl;
+    }
+
+	bool permutations_valid(int numbers){
+
+        int order = numbers;
+		int end;
+		while(order != 0){
+			if(!on_station_.empty()){
+				end = on_station_.back();
+				if(end == order){
+					on_start_.push_front(end);
+					order--;
+					on_station_.pop_back();
+                    continue;
+				}
+			}
+
+			if(on_rail_.empty())
+					return false;
+			end = on_rail_.back();
+			while(end != order){
+				on_station_.push_back(end);
+				on_rail_.pop_back();
+				if(on_rail_.empty())
+					return false;
+				end = on_rail_.back();
+			}
+			on_start_.push_front(end);
+			order--;
+			on_rail_.pop_back();
+		}
+
+		return true;
+	}
+
+    void operator<<(const std::string &line)
+    {
+		char *token = strtok(const_cast<char*>(line.c_str()), " ");
+		while (token != nullptr)
+		{
+			on_rail_.push_back(std::stoi(std::string(token)));
+			token = strtok(nullptr, " ");
+		}
     }
 
 private:
     std::deque< int > on_rail_;
+    std::deque< int > on_station_;
+    std::deque< int > on_start_;
 };
 
-void check_permutations(std::string &line, int num)
+bool check_permutations(std::string &line, int num)
 {
-    std::cout << "num : " << num << std::endl;
-    std::cout << "line : " << line << std::endl;
+	Train trains;
+	trains << line;
+	//trains.show();
+	return trains.permutations_valid(num);
 }
 
 void solve_uva_problem(std::istream &is, std::ostream &os)
@@ -46,7 +98,6 @@ void solve_uva_problem(std::istream &is, std::ostream &os)
     std::string numbers;
     std::getline(is, numbers);
     int num = std::stoi(numbers);
-    os << "first num : " << num << std::endl;
     while (1) {
         if (double_check_zero == true) {
             std::getline(is, numbers);
@@ -55,7 +106,6 @@ void solve_uva_problem(std::istream &is, std::ostream &os)
             else {
                 double_check_zero = false;
                 num = std::stoi(numbers);
-                os << "first num : " << num << std::endl;
             }
         }
 
@@ -65,7 +115,10 @@ void solve_uva_problem(std::istream &is, std::ostream &os)
             os << std::endl;
         } else {
             double_check_zero = false;
-            check_permutations(numbers, num);
+            if(check_permutations(numbers, num) == true)
+				os << "Yes" << std::endl;
+			else
+				os << "No" << std::endl;
         }
     }
 }
