@@ -16,20 +16,10 @@ class Train
 {
 
 public:
-    std::deque< int > const &get_on_rail() const { return on_rail_; }
-    std::deque< int > const &get_on_station() const { return on_station_; }
 
     void show(void)
     {
         for (auto &it : on_rail_) {
-			std::cout << it << " ";
-        }
-		std::cout << std::endl;
-    }
-
-    void show_start(void)
-    {
-        for (auto &it : on_start_) {
 			std::cout << it << " ";
         }
 		std::cout << std::endl;
@@ -43,7 +33,6 @@ public:
 			if(!on_station_.empty()){
 				end = on_station_.back();
 				if(end == order){
-					on_start_.push_front(end);
 					order--;
 					on_station_.pop_back();
                     continue;
@@ -60,7 +49,6 @@ public:
 					return false;
 				end = on_rail_.back();
 			}
-			on_start_.push_front(end);
 			order--;
 			on_rail_.pop_back();
 		}
@@ -81,7 +69,6 @@ public:
 private:
     std::deque< int > on_rail_;
     std::deque< int > on_station_;
-    std::deque< int > on_start_;
 };
 
 bool check_permutations(std::string &line, int num)
