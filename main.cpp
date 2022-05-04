@@ -27,13 +27,12 @@ public:
 
 	bool permutations_valid(int numbers){
 
-        int order = numbers;
 		int end;
-		while(order != 0){
+		while(numbers != 0){
 			if(!on_station_.empty()){
 				end = on_station_.back();
-				if(end == order){
-					order--;
+				if(end == numbers){
+					numbers--;
 					on_station_.pop_back();
                     continue;
 				}
@@ -42,14 +41,14 @@ public:
 			if(on_rail_.empty())
 					return false;
 			end = on_rail_.back();
-			while(end != order){
+			while(end != numbers){
 				on_station_.push_back(end);
 				on_rail_.pop_back();
 				if(on_rail_.empty())
 					return false;
 				end = on_rail_.back();
 			}
-			order--;
+			numbers--;
 			on_rail_.pop_back();
 		}
 
