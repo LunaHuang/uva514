@@ -16,53 +16,52 @@ class Train
 {
 
 public:
-
     void show(void)
     {
         for (auto &it : on_rail_) {
-			std::cout << it << " ";
+            std::cout << it << " ";
         }
-		std::cout << std::endl;
+        std::cout << std::endl;
     }
 
-	bool permutations_valid(int numbers){
+    bool permutations_valid(int numbers)
+    {
 
-		int end;
-		while(numbers != 0){
-			if(!on_station_.empty()){
-				end = on_station_.back();
-				if(end == numbers){
-					numbers--;
-					on_station_.pop_back();
+        int end;
+        while (numbers != 0) {
+            if (!on_station_.empty()) {
+                end = on_station_.back();
+                if (end == numbers) {
+                    numbers--;
+                    on_station_.pop_back();
                     continue;
-				}
-			}
+                }
+            }
 
-			if(on_rail_.empty())
-					return false;
-			end = on_rail_.back();
-			while(end != numbers){
-				on_station_.push_back(end);
-				on_rail_.pop_back();
-				if(on_rail_.empty())
-					return false;
-				end = on_rail_.back();
-			}
-			numbers--;
-			on_rail_.pop_back();
-		}
+            if (on_rail_.empty())
+                return false;
+            end = on_rail_.back();
+            while (end != numbers) {
+                on_station_.push_back(end);
+                on_rail_.pop_back();
+                if (on_rail_.empty())
+                    return false;
+                end = on_rail_.back();
+            }
+            numbers--;
+            on_rail_.pop_back();
+        }
 
-		return true;
-	}
+        return true;
+    }
 
     void operator<<(const std::string &line)
     {
-		char *token = strtok(const_cast<char*>(line.c_str()), " ");
-		while (token != nullptr)
-		{
-			on_rail_.push_back(std::stoi(std::string(token)));
-			token = strtok(nullptr, " ");
-		}
+        char *token = strtok(const_cast< char * >(line.c_str()), " ");
+        while (token != nullptr) {
+            on_rail_.push_back(std::stoi(std::string(token)));
+            token = strtok(nullptr, " ");
+        }
     }
 
 private:
@@ -72,10 +71,10 @@ private:
 
 bool check_permutations(std::string &line, int num)
 {
-	Train trains;
-	trains << line;
-	//trains.show();
-	return trains.permutations_valid(num);
+    Train trains;
+    trains << line;
+    //trains.show();
+    return trains.permutations_valid(num);
 }
 
 void solve_uva_problem(std::istream &is, std::ostream &os)
@@ -101,10 +100,10 @@ void solve_uva_problem(std::istream &is, std::ostream &os)
             os << std::endl;
         } else {
             double_check_zero = false;
-            if(check_permutations(numbers, num) == true)
-				os << "Yes" << std::endl;
-			else
-				os << "No" << std::endl;
+            if (check_permutations(numbers, num) == true)
+                os << "Yes" << std::endl;
+            else
+                os << "No" << std::endl;
         }
     }
 }
