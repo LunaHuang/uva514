@@ -73,37 +73,29 @@ bool check_permutations(std::string &line, int num)
 {
     Train trains;
     trains << line;
-    //trains.show();
+    //    trains.show();
     return trains.permutations_valid(num);
 }
 
 void solve_uva_problem(std::istream &is, std::ostream &os)
 {
-    bool double_check_zero = false;
     std::string numbers;
     std::getline(is, numbers);
     int num = std::stoi(numbers);
     while (1) {
-        if (double_check_zero == true) {
-            std::getline(is, numbers);
-            if (numbers.compare("0") == 0)
-                break;
-            else {
-                double_check_zero = false;
-                num = std::stoi(numbers);
-            }
-        }
-
         std::getline(is, numbers);
-        if (numbers.compare("0") == 0) {
-            double_check_zero = true;
-            os << std::endl;
-        } else {
-            double_check_zero = false;
+        if (numbers.compare("0") != 0) {
             if (check_permutations(numbers, num) == true)
                 os << "Yes" << std::endl;
             else
                 os << "No" << std::endl;
+        } else {
+            os << std::endl;
+            std::getline(is, numbers);
+            if (numbers.compare("0") == 0)
+                break;
+            else
+                num = std::stoi(numbers);
         }
     }
 }

@@ -61,8 +61,8 @@ TEST(TestCase1, Solution)
 0
 )";
 
-EXPECT_EQ(
-R"(
+        EXPECT_EQ(
+                R"(
 Yes
 No
 Yes
@@ -105,7 +105,8 @@ Yes
 Yes
 Yes
 
-)",Solve(fake_cin));
+)",
+                Solve(fake_cin));
     }
 }
 
@@ -131,7 +132,7 @@ TEST(TestCase2, Solution)
 )";
 
         EXPECT_EQ(
-R"(
+                R"(
 Yes
 No
 Yes
@@ -139,7 +140,8 @@ Yes
 
 Yes
 
-)", Solve(fake_cin));
+)",
+                Solve(fake_cin));
     }
 }
 
@@ -486,7 +488,8 @@ No
 Yes
 Yes
 
-)",Solve());
+)",
+                Solve());
     }
 }
 #endif
